@@ -1,9 +1,12 @@
 import React from "react"
+import Layout from "../../components/Layout"
 
 const TasksScreen: React.FC = () => {
     return (
-        <div>TasksScreen</div>
+        <Layout namePage="Tasks">
+            <div>TasksScreen</div>
+        </Layout>
     )
 }
 
-export default TasksScreen;
+export default TasksScreen
