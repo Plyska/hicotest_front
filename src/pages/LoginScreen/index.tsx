@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import CssBaseline from "@mui/material/CssBaseline"
 import TextField from "@mui/material/TextField"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import Checkbox from "@mui/material/Checkbox"
 import Link from "@mui/material/Link"
 import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
@@ -12,16 +10,21 @@ import Grid from "@mui/material/Grid"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import { Copyright, styles } from "./styles"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { LoginForm } from "./types"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { schema } from "../../validation/LoginFormValidation"
 
 const LoginScreen: React.FC = () => {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const data = new FormData(event.currentTarget)
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        })
-    }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginForm>({
+        mode: "onBlur",
+        resolver: yupResolver(schema),
+    })
+    const onSubmit: SubmitHandler<LoginForm> = (data) => console.log(data)
 
     return (
         <Box sx={styles.container}>
@@ -48,10 +51,11 @@ const LoginScreen: React.FC = () => {
                         <Box
                             component="form"
                             noValidate
-                            onSubmit={handleSubmit}
+                            onSubmit={handleSubmit(onSubmit)}
                             sx={{ mt: 1 }}
                         >
                             <TextField
+                                {...register("email")}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -59,8 +63,13 @@ const LoginScreen: React.FC = () => {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                helperText={
+                                    errors?.email && errors?.email?.message
+                                }
+                                error={!!errors?.email}
                             />
                             <TextField
+                                {...register("password")}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -69,6 +78,11 @@ const LoginScreen: React.FC = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                helperText={
+                                    errors?.password &&
+                                    errors?.password?.message
+                                }
+                                error={!!errors?.password}
                             />
                             <Button
                                 type="submit"
