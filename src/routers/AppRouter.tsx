@@ -6,19 +6,30 @@ import HomeScreen from "../pages/HomeScreen"
 
 import PrivateRoot from "../roots/PrivateRoot"
 import PublicRoot from "../roots/PublicRoot"
+import LoginScreen from "../pages/LoginScreen"
+import RegisterScreen from "../pages/RegisterScreen"
 
 const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                {/* <Route
-              path="/"
-              element={
-                <PublicRoot>
-                  <LogInScreen />
-                </PublicRoot>
-              }
-            /> */}
+                <Route
+                    path="/"
+                    element={
+                        <PublicRoot>
+                            <LoginScreen />
+                        </PublicRoot>
+                    }
+                />
+
+                <Route
+                    path="/register"
+                    element={
+                        <PublicRoot>
+                            <RegisterScreen />
+                        </PublicRoot>
+                    }
+                />
 
                 <Route
                     path="/"

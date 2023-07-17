@@ -13,13 +13,16 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import { Copyright, styles } from "./styles"
 
-const LoginScreen: React.FC = () => {
+const RegisterScreen: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
         console.log({
+            name: data.get("name"),
             email: data.get("email"),
             password: data.get("password"),
+            current_password: data.get("current_password"),
+            capcha: data.get("capcha"),
         })
     }
 
@@ -27,7 +30,6 @@ const LoginScreen: React.FC = () => {
         <Box sx={styles.container}>
             <Grid sx={styles.mainGrid} container component="main">
                 <CssBaseline />
-                <Grid item xs={false} sm={4} md={7} sx={styles.imgGrid} />
                 <Grid
                     sx={styles.formGrid}
                     item
@@ -43,7 +45,7 @@ const LoginScreen: React.FC = () => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Sign up
                         </Typography>
                         <Box
                             component="form"
@@ -64,11 +66,40 @@ const LoginScreen: React.FC = () => {
                                 margin="normal"
                                 required
                                 fullWidth
+                                id="name"
+                                label="Name"
+                                name="name"
+                                autoComplete="name"
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
                                 name="password"
                                 label="Password"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="confirm_password"
+                                label="Confirm Password"
+                                type="password"
+                                id="confirm_password"
+                                autoComplete="current-password"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        value={true}
+                                        color="primary"
+                                        name="capcha"
+                                    />
+                                }
+                                label="I'm not a robot"
                             />
                             <Button
                                 type="submit"
@@ -76,17 +107,17 @@ const LoginScreen: React.FC = () => {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Sign In
+                                Sign Up
                             </Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link variant="body2">
+                                    <Link href="#" variant="body2">
                                         Forgot password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/register" variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                    <Link href="/" variant="body2">
+                                        {"Do have an account? Log In"}
                                     </Link>
                                 </Grid>
                             </Grid>
@@ -94,9 +125,10 @@ const LoginScreen: React.FC = () => {
                         </Box>
                     </Box>
                 </Grid>
+                <Grid item xs={false} sm={4} md={7} sx={styles.imgGrid} />
             </Grid>
         </Box>
     )
 }
 
-export default LoginScreen
+export default RegisterScreen
