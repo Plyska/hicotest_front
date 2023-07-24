@@ -14,8 +14,10 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { RegistetionForm } from "./types"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { schema } from "../../validation/RegisterFormValidation"
+import { useNavigate } from "react-router-dom"
 
 const RegisterScreen: React.FC = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -25,7 +27,11 @@ const RegisterScreen: React.FC = () => {
         resolver: yupResolver(schema),
     })
 
-    const onSubmit: SubmitHandler<RegistetionForm> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<RegistetionForm> = (data) => {
+        console.log(data)
+        navigate(0)
+        localStorage.setItem("token", "1q2w3e1a2s3d1z2x3c")
+    }
 
     return (
         <Box sx={styles.container}>
@@ -129,7 +135,7 @@ const RegisterScreen: React.FC = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/" variant="body2">
+                                    <Link href="/login" variant="body2">
                                         {"Do have an account? Log In"}
                                     </Link>
                                 </Grid>

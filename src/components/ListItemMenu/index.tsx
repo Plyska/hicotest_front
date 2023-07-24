@@ -8,6 +8,7 @@ import {
 import HomeIcon from "@mui/icons-material/Home"
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined"
 import ConstructionOutlinedIcon from "@mui/icons-material/ConstructionOutlined"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 interface ListItemMenuProps {
     open?: boolean
@@ -24,6 +25,9 @@ const ListItemMenu: React.FC<ListItemMenuProps> = ({ open, title }) => {
         }
         if (title === "Tasks") {
             return <ListAltOutlinedIcon />
+        }
+        if (title === "Logout") {
+            return <LogoutIcon />
         }
     }
 

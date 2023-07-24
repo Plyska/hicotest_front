@@ -6,7 +6,7 @@ interface PublicRootProps {
 }
 
 const PublicRoot: React.FC<PublicRootProps> = ({ children }) => {
-    const token = false //localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     return token ? <HomeScreen /> : children
 }

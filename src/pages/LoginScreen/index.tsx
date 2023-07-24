@@ -14,8 +14,10 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { LoginForm } from "./types"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { schema } from "../../validation/LoginFormValidation"
+import { useNavigate } from "react-router-dom"
 
 const LoginScreen: React.FC = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -24,7 +26,11 @@ const LoginScreen: React.FC = () => {
         mode: "onBlur",
         resolver: yupResolver(schema),
     })
-    const onSubmit: SubmitHandler<LoginForm> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<LoginForm> = (data) => {
+        console.log(data)
+        navigate(0)
+        localStorage.setItem("token", "1q2w3e1a2s3d1z2x3c")
+    }
 
     return (
         <Box sx={styles.container}>

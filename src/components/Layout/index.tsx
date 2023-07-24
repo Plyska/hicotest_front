@@ -13,6 +13,7 @@ import { ROUTES, projectName } from "../../constants"
 import { NavLink } from "react-router-dom"
 import ListItemMenu from "../ListItemMenu"
 import { styles } from "./styles"
+import LogoutButton from "../LogoutButton"
 
 interface LayoutProps {
     children: React.ReactNode
@@ -75,6 +76,7 @@ export default function Layout({ children, namePage }: LayoutProps) {
                             <ListItemMenu open={open} title={route.name} />
                         </Box>
                     ))}
+                    <LogoutButton open={open}  />
                 </List>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

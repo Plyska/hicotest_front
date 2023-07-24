@@ -6,7 +6,7 @@ interface PrivateRootProps {
 }
 
 const PrivateRoot: React.FC<PrivateRootProps> = ({ children }) => {
-    const token = true //localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     return token ? children : <LoginScreen />
 }
